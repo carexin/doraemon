@@ -1,0 +1,69 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.2.2.RELEASE'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+apply plugin: 'distribution'
+
+distributions {
+    main {
+        baseName = "${project.name}"
+        contents {
+            into('/conf'){
+                from('src/main/resources')
+                exclude("application.yml")
+            }
+            into('/lib'){
+                from('build/libs')
+            }
+            into('/bin'){
+                from('../bin')
+            }
+        }
+    }
+}
+
+processResources.enabled = false
+
+distTar {
+    dependsOn bootJar
+}
+
+tasks.withType(Tar) {
+    compression = Compression.GZIP
+    extension = "tar.gz"
+}
+
+configurations {
+    customArch
+}
+
+artifacts {
+    customArch file(distTar.archivePath)
+}
+
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+group 'doraemon'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'com.google.guava', name: 'guava', version: '28.1-jre'
+
+    // spring-boot-starter-web
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    // spring-boot-starter
+    implementation 'org.springframework.boot:spring-boot-starter'
+}
