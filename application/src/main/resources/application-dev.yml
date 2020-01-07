@@ -1,5 +1,5 @@
 server:
-  port: 8000
+  port: 15000
   ssl:
     key-store: keys/server.keystore
     key-store-type: JKS
@@ -7,3 +7,4 @@ server:
     enabled: true
     key-store-password: liyudong
     key-password: liyudong
+#  keytool -export -alias tomcat -keystore server.keystore -rfc -file liyd_cas.crt

@@ -9,4 +9,5 @@ pluginManagement {
 rootProject.name = 'doraemon-web'
 include 'application'
 include 'http-clients'
+include 'http-client-light'
 

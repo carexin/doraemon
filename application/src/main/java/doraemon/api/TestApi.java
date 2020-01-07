@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestApi {
 
-  @GetMapping("/scf-front/order-add")
+  @GetMapping("/test")
   public String get() {
     System.out.println("123");
     return "123";

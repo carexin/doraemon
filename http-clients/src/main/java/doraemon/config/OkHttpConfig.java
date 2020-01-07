@@ -1,5 +1,8 @@
 package doraemon.config;
 
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.net.Proxy.Type;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -15,6 +18,12 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class OkHttpConfig {
+
+  private final ProxyProperties proxyProperties;
+
+  public OkHttpConfig(ProxyProperties proxyProperties) {
+    this.proxyProperties = proxyProperties;
+  }
 
   /**
    * 可以自定义校验过程, 不满足就抛出接口中推荐的异常.
@@ -37,6 +46,7 @@ public class OkHttpConfig {
     };
   }
 
+
   @Bean
   public HostnameVerifier hostnameVerifier() {
     return (s, sslSession) -> true;
@@ -53,10 +63,23 @@ public class OkHttpConfig {
   }
 
   @Bean
+  public Proxy proxy() {
+    return new Proxy(
+        Type.HTTP,
+        new InetSocketAddress(proxyProperties.getHost(), proxyProperties.getPort())
+    );
+  }
+
+  @Bean
   public OkHttpClient okHttpClient() throws KeyManagementException, NoSuchAlgorithmException {
+
+    System.out.println(proxyProperties.getHost());
     return new OkHttpClient.Builder()
         .sslSocketFactory(sslSocketFactory(), x509TrustManager())
+        .proxy(proxy())
         .hostnameVerifier(hostnameVerifier())
         .build();
   }
+
+
 }

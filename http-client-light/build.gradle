@@ -1,0 +1,13 @@
+plugins {
+    id 'java'
+}
+
+group 'doraemon'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'commons-httpclient', name: 'commons-httpclient', version: '3.1'
+}
