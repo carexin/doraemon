@@ -4,7 +4,7 @@ server:
     key-store: keys/server.keystore
     key-store-type: JKS
     key-alias: tomcat
-    enabled: true
+    enabled: false
     key-store-password: liyudong
     key-password: liyudong
 #  keytool -export -alias tomcat -keystore server.keystore -rfc -file liyd_cas.crt

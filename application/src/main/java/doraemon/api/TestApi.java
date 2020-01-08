@@ -1,5 +1,8 @@
 package doraemon.api;
 
+import com.google.common.collect.Maps;
+import doraemon.entity.TestEntity;
+import java.util.Map;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,9 +17,12 @@ public class TestApi {
     return "123";
   }
 
-  @PostMapping("/scf-front/order-add")
-  public String post(@RequestBody TestEntity testEntity) {
+  @PostMapping("/add")
+  public Map<String, String> post(@RequestBody TestEntity testEntity) {
+
     System.out.println(testEntity.toString());
-    return "123";
+    Map<String, String> responseBody = Maps.newHashMapWithExpectedSize(1);
+    responseBody.put("格式化后的明文内容", testEntity.toString());
+    return responseBody;
   }
 }
