@@ -1,5 +1,6 @@
-package doraemon.encrypt;
+package doraemon.config;
 
+import doraemon.encrypt.EncryptModel;
 import doraemon.util.EncryptUtils;
 import java.io.Reader;
 import java.io.StringReader;

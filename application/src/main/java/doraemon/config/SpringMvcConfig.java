@@ -1,6 +1,5 @@
 package doraemon.config;
 
-import doraemon.encrypt.CustomEncryptHttpMessageConverter;
 import java.util.Collections;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.context.annotation.Bean;
